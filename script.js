@@ -70,7 +70,7 @@ setInterval(() => {
 },3000);
 const canvas = document.getElementById("fireworks");
 
-if(canvas){
+if (canvas) {
 
     const ctx = canvas.getContext("2d");
 
@@ -80,12 +80,10 @@ if(canvas){
     let particles = [];
 
     function createFirework() {
-
         let x = Math.random() * canvas.width;
         let y = Math.random() * canvas.height / 2;
 
         for (let i = 0; i < 50; i++) {
-
             particles.push({
                 x,
                 y,
@@ -94,39 +92,30 @@ if(canvas){
                 dy: (Math.random() - 0.5) * 8,
                 alpha: 1
             });
-
         }
     }
 
     function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-
-        particles.forEach((p,index)=>{
-
+        particles.forEach((p, index) => {
             p.x += p.dx;
             p.y += p.dy;
             p.alpha -= 0.01;
 
             ctx.beginPath();
-            ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(255,215,0,${p.alpha})`;
             ctx.fill();
 
-            if(p.alpha <= 0){
-                particles.splice(index,1);
+            if (p.alpha <= 0) {
+                particles.splice(index, 1);
             }
-
         });
 
         requestAnimationFrame(animate);
     }
 
-    setInterval(createFirework,1000);
+    setInterval(createFirework, 1000);
     animate();
-
-    window.addEventListener("resize", () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
 }
