@@ -362,3 +362,7 @@ button:hover{
         opacity:0;
     }
 }
+#page3{
+    position: relative;
+    overflow: hidden;
+}
